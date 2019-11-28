@@ -292,6 +292,7 @@ query MyTrips {
     email
     trips {
       id
+      isBooked
       site
       mission {
         name
@@ -318,6 +319,7 @@ query MyTrips {
       "trips": [
         {
           "id": "67",
+          "isBooked": true,
           "site": "CCAFS SLC 40",
           "mission": {
             "name": "Merah Putih",
@@ -330,6 +332,7 @@ query MyTrips {
         },
         {
           "id": "69",
+          "isBooked": true,
           "site": "VAFB SLC 4E",
           "mission": {
             "name": "SAOCOM 1A",
@@ -341,6 +344,30 @@ query MyTrips {
           }
         }
       ]
+    }
+  }
+}
+
+-------------------------------------------------------------------------------- query:
+
+query GetLaunchById {
+  launch(id: 68) {
+    id
+    isBooked
+  }
+}
+
+// before running query:
+// * click "HTTP HEADERS" tab in bottom-left corner of browser
+// * enter JSON text: { "authorization": "ZGFpc3lAYXBvbGxvZ3JhcGhxbC5jb20=" }
+
+-------------------------------------------------------------------------------- response:
+
+{
+  "data": {
+    "launch": {
+      "id": "68",
+      "isBooked": false
     }
   }
 }
