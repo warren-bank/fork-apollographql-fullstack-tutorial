@@ -12,20 +12,21 @@ const offset = 97; // letter A's charcode is 97
 const avatars = [dog1, dog2, dog3];
 const maxIndex = avatars.length - 1;
 function pickAvatarByEmail(email) {
-  const charCode = email.toLowerCase().charCodeAt(0) - offset;
+  const charCode = email ? (email.toLowerCase().charCodeAt(0) - offset) : max;
   const percentile = Math.max(0, Math.min(max, charCode)) / max;
   return avatars[Math.round(maxIndex * percentile)];
 }
 
 export default function Header({ image, children = 'Space Explorer' }) {
-  const email = atob(localStorage.getItem('token'));
+  const token = localStorage.getItem('token');
+  const email = token ? atob(token) : '';
   const avatar = image || pickAvatarByEmail(email);
   return (
     <Container>
       <Image round={!image} src={avatar} alt="Space dog" />
       <div>
         <h2>{children}</h2>
-        <Subheading>{email}</Subheading>
+        { email && <Subheading>{email}</Subheading> }
       </div>
     </Container>
   );
