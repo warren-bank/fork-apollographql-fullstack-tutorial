@@ -89,6 +89,72 @@ query GetLaunches {
 
 -------------------------------------------------------------------------------- query:
 
+query GetLaunches {
+  launches(pageSize: 3, after: "1564092060") {
+    cursor
+    hasMore
+    launches {
+      id
+      site
+      mission {
+        name
+      }
+      rocket {
+        name
+        type
+      }
+    }
+  }
+}
+
+-------------------------------------------------------------------------------- response:
+
+{
+  "data": {
+    "launches": {
+      "cursor": "1558665000",
+      "hasMore": true,
+      "launches": [
+        {
+          "id": "81",
+          "site": "KSC LC 39A",
+          "mission": {
+            "name": "STP-2"
+          },
+          "rocket": {
+            "name": "Falcon Heavy",
+            "type": "FT"
+          }
+        },
+        {
+          "id": "80",
+          "site": "VAFB SLC 4E",
+          "mission": {
+            "name": "RADARSAT Constellation"
+          },
+          "rocket": {
+            "name": "Falcon 9",
+            "type": "FT"
+          }
+        },
+        {
+          "id": "79",
+          "site": "CCAFS SLC 40",
+          "mission": {
+            "name": "Starlink v0.9"
+          },
+          "rocket": {
+            "name": "Falcon 9",
+            "type": "FT"
+          }
+        }
+      ]
+    }
+  }
+}
+
+-------------------------------------------------------------------------------- query:
+
 query GetLaunchById($id: ID!) {
   launch(id: $id) {
     id
