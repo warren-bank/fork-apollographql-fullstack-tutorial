@@ -6,25 +6,33 @@ import { LaunchTile, Header, Button, Loading } from '../components';
 
 const pageSize = 5;
 
+export const LAUNCH_TILE_DATA = gql`
+  fragment LaunchTile on Launch {
+    id
+    isBooked
+    rocket {
+      id
+      name
+    }
+    mission {
+      name
+      missionPatch
+    }
+  }
+`;
+
 const GET_LAUNCHES = gql`
   query launchList($pageSize: Int, $after: String) {
     launches(pageSize: $pageSize, after: $after) {
       cursor
       hasMore
       launches {
-        id
-        isBooked
-        rocket {
-          id
-          name
-        }
-        mission {
-          name
-          missionPatch
-        }
+        ...LaunchTile
       }
     }
   }
+
+  ${LAUNCH_TILE_DATA}
 `;
 
 export default function Launches() {
