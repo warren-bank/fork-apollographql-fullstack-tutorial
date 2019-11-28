@@ -201,4 +201,148 @@ query GetLaunchById($id: ID!) {
   }
 }
 
+-------------------------------------------------------------------------------- query:
+
+mutation LoginUser {
+  login(email: "daisy@apollographql.com")
+}
+
+-------------------------------------------------------------------------------- response:
+
+{
+  "data": {
+    "login": "ZGFpc3lAYXBvbGxvZ3JhcGhxbC5jb20="
+  }
+}
+
+-------------------------------------------------------------------------------- query:
+
+mutation BookTrips {
+  bookTrips(launchIds: [67, 68, 69]) {
+    success
+    message
+    launches {
+      id
+    }
+  }
+}
+
+// before running query:
+// * click "HTTP HEADERS" tab in bottom-left corner of browser
+// * enter JSON text: { "authorization": "ZGFpc3lAYXBvbGxvZ3JhcGhxbC5jb20=" }
+
+-------------------------------------------------------------------------------- response:
+
+{
+  "data": {
+    "bookTrips": {
+      "success": true,
+      "message": "trips booked successfully",
+      "launches": [
+        {
+          "id": "67"
+        },
+        {
+          "id": "68"
+        },
+        {
+          "id": "69"
+        }
+      ]
+    }
+  }
+}
+
+-------------------------------------------------------------------------------- query:
+
+mutation CancelTrip {
+  cancelTrip(launchId: 68) {
+    success
+    message
+    launches {
+      id
+    }
+  }
+}
+
+// before running query:
+// * click "HTTP HEADERS" tab in bottom-left corner of browser
+// * enter JSON text: { "authorization": "ZGFpc3lAYXBvbGxvZ3JhcGhxbC5jb20=" }
+
+-------------------------------------------------------------------------------- response:
+
+{
+  "data": {
+    "cancelTrip": {
+      "success": true,
+      "message": "trip cancelled",
+      "launches": [
+        {
+          "id": "68"
+        }
+      ]
+    }
+  }
+}
+
+-------------------------------------------------------------------------------- query:
+
+query MyTrips {
+  me {
+    email
+    trips {
+      id
+      site
+      mission {
+        name
+        missionPatch
+      }
+      rocket {
+        name
+        type
+      }
+    }
+  }
+}
+
+// before running query:
+// * click "HTTP HEADERS" tab in bottom-left corner of browser
+// * enter JSON text: { "authorization": "ZGFpc3lAYXBvbGxvZ3JhcGhxbC5jb20=" }
+
+-------------------------------------------------------------------------------- response:
+
+{
+  "data": {
+    "me": {
+      "email": "daisy@apollographql.com",
+      "trips": [
+        {
+          "id": "67",
+          "site": "CCAFS SLC 40",
+          "mission": {
+            "name": "Merah Putih",
+            "missionPatch": "https://images2.imgbox.com/a8/f5/ZgdsrbqW_o.png"
+          },
+          "rocket": {
+            "name": "Falcon 9",
+            "type": "FT"
+          }
+        },
+        {
+          "id": "69",
+          "site": "VAFB SLC 4E",
+          "mission": {
+            "name": "SAOCOM 1A",
+            "missionPatch": "https://images2.imgbox.com/66/d2/oVB1ofaZ_o.png"
+          },
+          "rocket": {
+            "name": "Falcon 9",
+            "type": "FT"
+          }
+        }
+      ]
+    }
+  }
+}
+
 --------------------------------------------------------------------------------
