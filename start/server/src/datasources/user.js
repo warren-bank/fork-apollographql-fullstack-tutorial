@@ -61,13 +61,15 @@ class UserAPI extends DataSource {
   }
 
   async getLaunchIdsByUser() {
+    const noopResponse = []
+    if (!this.context || !this.context.user) return noopResponse;
     const userId = this.context.user.id;
     const found = await this.store.trips.findAll({
       where: { userId },
     });
     return found && found.length
-      ? found.map(l => l.dataValues.launchId).filter(l => !!l)
-      : [];
+      ? found.filter(l => !!l).map(l => l.dataValues.launchId)
+      : noopResponse;
   }
 
   async isBookedOnLaunch({ launchId }) {
@@ -76,7 +78,7 @@ class UserAPI extends DataSource {
     const found = await this.store.trips.findAll({
       where: { userId, launchId },
     });
-    return found && found.length > 0;
+    return found && (found.length > 0);
   }
 }
 
