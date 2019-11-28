@@ -372,4 +372,23 @@ query GetLaunchById {
   }
 }
 
+-------------------------------------------------------------------------------- run on CLI:
+
+npm install --save-dev apollo
+
+set ENGINE_API_KEY=service:my-service-439:E4VSTiXeFWaSSBgFWXOiSA
+
+"node_modules/.bin/apollo" "service:push" --endpoint=http://localhost:4000
+
+-------------------------------------------------------------------------------- output:
+
+  v Loading Apollo Project
+  v Uploading service to Engine
+
++--------------------------------------------------------+
+¦ id     ¦ graph                               ¦ tag     ¦
+¦--------+-------------------------------------+---------¦
+¦ 2182b5 ¦ wb-apollographql-fullstack-tutorial ¦ current ¦
++--------------------------------------------------------+
+
 --------------------------------------------------------------------------------
