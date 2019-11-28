@@ -3,17 +3,19 @@
 
 // https://www.apollographql.com/docs/react/get-started/
 //   brief detour
-// https://github.com/apollographql/apollo-client/blob/master/packages/apollo-boost/src/index.ts
-//   'apollo-boost' module imports modules and exports them in a reorganized collection
-// https://github.com/apollographql/apollo-client/blob/%40apollo/client%403.0.0-beta.14/src/ApolloClient.ts#L142
-//   this documentation is out of date
-//   - calling constructor with "uri" throw an Exception:
-//       new ApolloClient({ uri: 'http://localhost:4000/' })
+
+// -----------------------------------------------------------------------------
 
 import { ApolloClient }  from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink }      from 'apollo-link-http';
 import gql               from 'graphql-tag';
+
+import React                        from 'react';
+import { render }                   from 'react-dom';
+import { ApolloProvider, useQuery } from '@apollo/react-hooks';
+
+// -----------------------------------------------------------------------------
 
 const cache = new InMemoryCache();
 const link = new HttpLink({
@@ -25,11 +27,11 @@ const client = new ApolloClient({
   link
 });
 
-client
-.query({
-  query: gql`
+// -----------------------------------------------------------------------------
 
-query GetLaunches {
+const LAUNCHES_QUERY = gql`
+
+{
   launches(pageSize: 3) {
     cursor
     hasMore
@@ -48,8 +50,23 @@ query GetLaunches {
   }
 }
 
-  `
-})
-.then(result => {
-  document.querySelector('#root').innerHTML = `<pre>${JSON.stringify(result, null, 2)}</pre>`;
-});
+`
+
+function Launches() {
+  const { loading, error, data } = useQuery(LAUNCHES_QUERY);
+
+  if (loading) return <p>Loading...</p>;
+  if (error)   return <p>Error :(</p>;
+
+  return <pre>{ JSON.stringify(data, null, 2) }</pre>;
+}
+
+// -----------------------------------------------------------------------------
+
+const App = () => (
+  <ApolloProvider client={client}>
+    <Launches />
+  </ApolloProvider>
+);
+
+render(<App />, document.getElementById('root'));
