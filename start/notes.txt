@@ -32,6 +32,7 @@ query GetLaunches {
       site
       mission {
         name
+        missionPatch
       }
       rocket {
         name
@@ -53,7 +54,8 @@ query GetLaunches {
           "id": "84",
           "site": "CCAFS SLC 40",
           "mission": {
-            "name": "Starlink 1"
+            "name": "Starlink 1",
+            "missionPatch": "https://images2.imgbox.com/d2/3b/bQaWiil0_o.png"
           },
           "rocket": {
             "name": "Falcon 9",
@@ -64,7 +66,8 @@ query GetLaunches {
           "id": "83",
           "site": "CCAFS SLC 40",
           "mission": {
-            "name": "Amos-17"
+            "name": "Amos-17",
+            "missionPatch": "https://images2.imgbox.com/a0/ab/XUoByiuR_o.png"
           },
           "rocket": {
             "name": "Falcon 9",
@@ -75,7 +78,8 @@ query GetLaunches {
           "id": "82",
           "site": "CCAFS SLC 40",
           "mission": {
-            "name": "CRS-18"
+            "name": "CRS-18",
+            "missionPatch": "https://images2.imgbox.com/08/a2/bPpNeIRJ_o.png"
           },
           "rocket": {
             "name": "Falcon 9",
@@ -98,6 +102,7 @@ query GetLaunches {
       site
       mission {
         name
+        missionPatch(size: SMALL)
       }
       rocket {
         name
@@ -119,7 +124,8 @@ query GetLaunches {
           "id": "81",
           "site": "KSC LC 39A",
           "mission": {
-            "name": "STP-2"
+            "name": "STP-2",
+            "missionPatch": "https://images2.imgbox.com/b0/23/BvwaqoS0_o.png"
           },
           "rocket": {
             "name": "Falcon Heavy",
@@ -130,7 +136,8 @@ query GetLaunches {
           "id": "80",
           "site": "VAFB SLC 4E",
           "mission": {
-            "name": "RADARSAT Constellation"
+            "name": "RADARSAT Constellation",
+            "missionPatch": "https://images2.imgbox.com/4e/dd/qsIUVh1j_o.png"
           },
           "rocket": {
             "name": "Falcon 9",
@@ -141,7 +148,8 @@ query GetLaunches {
           "id": "79",
           "site": "CCAFS SLC 40",
           "mission": {
-            "name": "Starlink v0.9"
+            "name": "Starlink v0.9",
+            "missionPatch": "https://images2.imgbox.com/7e/27/MGYJy1JY_o.png"
           },
           "rocket": {
             "name": "Falcon 9",
@@ -161,6 +169,7 @@ query GetLaunchById($id: ID!) {
     site
     mission {
       name
+      missionPatch(size: LARGE)
     }
     rocket {
       name
@@ -181,7 +190,8 @@ query GetLaunchById($id: ID!) {
       "id": "84",
       "site": "CCAFS SLC 40",
       "mission": {
-        "name": "Starlink 1"
+        "name": "Starlink 1",
+        "missionPatch": "https://images2.imgbox.com/d2/3b/bQaWiil0_o.png"
       },
       "rocket": {
         "name": "Falcon 9",

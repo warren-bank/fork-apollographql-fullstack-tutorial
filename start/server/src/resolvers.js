@@ -21,11 +21,22 @@ const getPaginatedLaunches = async (pageSize, after, launchAPI) => {
 }
 
 module.exports = {
+
   Query: {
     launches: (_, { pageSize = 20, after }, { dataSources }) => getPaginatedLaunches(pageSize, after, dataSources.launchAPI),
     launch:   (_, { id }, { dataSources })                   => dataSources.launchAPI.getLaunchById({ launchId: id }),
     me:       (_, __, { dataSources })                       => dataSources.userAPI.findOrCreateUser(),
 
     sameContext: (parent, args, context, info)               => (context.dataSources.userAPI.context === context)
+  },
+
+  Mission: {
+    // make sure the default size is 'large' in case user doesn't specify
+    missionPatch: (mission, { size } = { size: 'LARGE' })    => {
+      return (size === 'SMALL')
+        ? mission.missionPatchSmall
+        : mission.missionPatchLarge;
+    }
   }
+
 };
