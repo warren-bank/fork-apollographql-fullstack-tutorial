@@ -1,0 +1,94 @@
+-------------------------------------------------------------------------------- run on CLI:
+
+cd client
+npm run build
+
+-------------------------------------------------------------------------------- output:
+
+Creating an optimized production build...
+Compiled successfully.
+
+File sizes after gzip:
+
+  34.02 KB  build\static\js\2.2272221f.chunk.js
+  762 B     build\static\js\runtime~main.a8a9905a.js
+  487 B     build\static\js\main.8d13f458.chunk.js
+
+The project was built assuming it is hosted at the server root.
+You can control this with the homepage field in your package.json.
+For example, add this to build it for GitHub Pages:
+
+  "homepage" : "http://myname.github.io/myapp",
+
+The build folder is ready to be deployed.
+
+-------------------------------------------------------------------------------- run on CLI:
+
+httpd ./build
+
+# open webpage to run the transpiled ES5 javascript
+start "http://localhost:80/index.html"
+
+-------------------------------------------------------------------------------- output to DOM:
+
+{
+  "data": {
+    "launches": {
+      "cursor": "1564092060",
+      "hasMore": true,
+      "launches": [
+        {
+          "id": "84",
+          "site": "CCAFS SLC 40",
+          "mission": {
+            "name": "Starlink 1",
+            "missionPatch": "https://images2.imgbox.com/d2/3b/bQaWiil0_o.png",
+            "__typename": "Mission"
+          },
+          "rocket": {
+            "name": "Falcon 9",
+            "type": "FT",
+            "__typename": "Rocket"
+          },
+          "__typename": "Launch"
+        },
+        {
+          "id": "83",
+          "site": "CCAFS SLC 40",
+          "mission": {
+            "name": "Amos-17",
+            "missionPatch": "https://images2.imgbox.com/a0/ab/XUoByiuR_o.png",
+            "__typename": "Mission"
+          },
+          "rocket": {
+            "name": "Falcon 9",
+            "type": "FT",
+            "__typename": "Rocket"
+          },
+          "__typename": "Launch"
+        },
+        {
+          "id": "82",
+          "site": "CCAFS SLC 40",
+          "mission": {
+            "name": "CRS-18",
+            "missionPatch": "https://images2.imgbox.com/08/a2/bPpNeIRJ_o.png",
+            "__typename": "Mission"
+          },
+          "rocket": {
+            "name": "Falcon 9",
+            "type": "FT",
+            "__typename": "Rocket"
+          },
+          "__typename": "Launch"
+        }
+      ],
+      "__typename": "LaunchConnection"
+    }
+  },
+  "loading": false,
+  "networkStatus": 7,
+  "stale": false
+}
+
+--------------------------------------------------------------------------------
