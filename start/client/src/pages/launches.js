@@ -4,9 +4,11 @@ import gql                 from 'graphql-tag';
 
 import { LaunchTile, Header, Button, Loading } from '../components';
 
+const pageSize = 5;
+
 const GET_LAUNCHES = gql`
-  query launchList($after: String) {
-    launches(after: $after) {
+  query launchList($pageSize: Int, $after: String) {
+    launches(pageSize: $pageSize, after: $after) {
       cursor
       hasMore
       launches {
@@ -26,7 +28,7 @@ const GET_LAUNCHES = gql`
 `;
 
 export default function Launches() {
-  const { data, loading, error, fetchMore } = useQuery(GET_LAUNCHES);
+  const { data, loading, error, fetchMore } = useQuery(GET_LAUNCHES, { variables: {pageSize} });
   if (loading) return <Loading />;
   if (error)   return <p>ERROR</p>;
 
@@ -49,6 +51,7 @@ export default function Launches() {
             onClick={() =>
               fetchMore({
                 variables: {
+                  pageSize,
                   after: data.launches.cursor,
                 },
                 updateQuery: (prev, { fetchMoreResult, ...rest }) => {
