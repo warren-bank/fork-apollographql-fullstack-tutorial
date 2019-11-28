@@ -10,9 +10,21 @@ import React              from 'react';
 import ReactDOM           from 'react-dom';
 import Pages              from './pages';
 
+const token = localStorage.getItem('token');
+
 const cache = new InMemoryCache();
 const link = new HttpLink({
-  uri: 'http://localhost:4000/'
+  uri: 'http://localhost:4000/',
+  headers: {
+    authorization: token ? token : ''
+  }
+});
+
+cache.writeData({
+  data: {
+    isLoggedIn: !!token,
+    cartItems: [],
+  },
 });
 
 const client = new ApolloClient({
