@@ -4,6 +4,7 @@
 import { ApolloClient }   from 'apollo-client';
 import { InMemoryCache }  from 'apollo-cache-inmemory';
 import { HttpLink }       from 'apollo-link-http';
+import { setContext }     from 'apollo-link-context';
 import gql                from 'graphql-tag';
 
 import { ApolloProvider, useQuery } from '@apollo/react-hooks';
@@ -15,15 +16,23 @@ import Pages                        from './pages';
 import Login                        from './pages/login';
 import injectStyles                 from './styles';
 
-const token = localStorage.getItem('token');
-
 const cache = new InMemoryCache();
-const link = new HttpLink({
-  uri: 'http://localhost:4000/',
-  headers: {
-    authorization: token ? token : ''
+
+const httpLink = new HttpLink({
+  uri: 'http://localhost:4000/'
+});
+
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('token');
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? token : ""
+    }
   }
 });
+
+const link = authLink.concat(httpLink);
 
 const client = new ApolloClient({
   cache,
@@ -34,8 +43,8 @@ const client = new ApolloClient({
 
 cache.writeData({
   data: {
-    isLoggedIn: !!token,
-    cartItems: [],
+    isLoggedIn: !!localStorage.getItem('token'),
+    cartItems:  [],
   },
 });
 
